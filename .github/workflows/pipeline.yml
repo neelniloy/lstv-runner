@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs every 30 minutes (24/7)
     - cron: '*/30 * * * *'
-  workflow_dispatch: # Allows manual trigger anytime
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -18,13 +18,14 @@ jobs:
           repository: neelniloy/lstv_studio-
           token: ${{ secrets.GH_PAT }}
 
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          channel: stable
+          cache: true
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       - name: Run Auto Pipeline Engine
         env:
