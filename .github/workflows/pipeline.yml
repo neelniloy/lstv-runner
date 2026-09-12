@@ -15,8 +15,7 @@ jobs:
       - name: Checkout Private Repository Code
         uses: actions/checkout@v4
         with:
-          # Replace 'YOUR_GITHUB_USERNAME' with your actual GitHub username
-          repository: YOUR_GITHUB_USERNAME/lstv_studio-
+          repository: neelniloy/lstv_studio-
           token: ${{ secrets.GH_PAT }}
 
       - name: Setup Dart SDK
