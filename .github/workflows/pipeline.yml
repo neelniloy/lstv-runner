@@ -31,5 +31,5 @@ jobs:
         env:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           APP_TOKEN: ${{ secrets.APP_TOKEN }}
-          CONCURRENCY: 256
+          CONCURRENCY: 128
         run: dart run bin/build_catalog.dart
