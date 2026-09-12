@@ -1,0 +1,35 @@
+name: Auto Pipeline Catalog Build
+
+on:
+  schedule:
+    # Runs every 30 minutes (24/7)
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Allows manual trigger anytime
+
+jobs:
+  build-and-publish:
+    name: Build & Publish IPTV Catalog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Private Repository Code
+        uses: actions/checkout@v4
+        with:
+          # Replace 'YOUR_GITHUB_USERNAME' with your actual GitHub username
+          repository: YOUR_GITHUB_USERNAME/lstv_studio
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run Auto Pipeline Engine
+        env:
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          APP_TOKEN: ${{ secrets.APP_TOKEN }}
+          CONCURRENCY: 256
+        run: dart run bin/build_catalog.dart
