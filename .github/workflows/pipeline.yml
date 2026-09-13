@@ -1,9 +1,9 @@
 name: Auto Pipeline Catalog Build
 
 on:
-  schedule:
+  #schedule:
     # Runs every 30 minutes (24/7)
-    - cron: '*/30 * * * *'
+    #- cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
